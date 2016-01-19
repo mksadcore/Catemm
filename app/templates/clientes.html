@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+{% block css_add %}
+	<style>
+		.red{
+			background-color: red;
+		}
+		.yellow{
+			background-color: yellow;
+		}
+		.green{
+
+		}
+        .text-red {
+          color: red;
+        }
+
+        .text-blue {
+          color: blue;
+        }
+        .False {
+            color: red;
+            background-color: red;
+        }
+
+        .True {
+            color: blue;
+            background-color: blue;
+        }
+	</style>
+
+{% endblock css_add %}
+
+{% block contenido %}
+
+
+
+    <div class="row" ng-app="Myapp">
+		<table class="table table-bordered">
+		    <thead>
+		      <tr>
+		        <th>Nombre:</th>
+		        <th >IFE</th>
+		        <th>Caratula</th>
+		        <th>Tarjeta Mejoravit</th>
+                 <th>Credito Mejoravit</th>
+		        <th>ODC 1</th>
+		        <th>ODC 2</th>
+		        <th>ODC 3</th>
+		        <th>Estastus</th>
+		        <th>Fecha</th>
+		        <th>Factura</th>
+		        <th>Comision</th>
+		        <th>Efectivo</th>
+		      </tr>
+		    </thead>
+		    <tbody ng-controller="Test">
+                <tr>
+                    {% for foo in cliente %}
+                        <td>{{ foo.id }}{{ foo.nombre }}{{ foo.apellidos }}</td>
+                        <td  class="red">{{ foo.ife.url }}</td>
+                        {% for faa in tarjeta %}
+                            {% if faa.cliente.id == foo.id %}
+                                <td> {{ faa.caratula }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ faa.numero_tarjeta }}
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="dropdown-item {{ faa.targeta_entregada  }}" type="button"><i class="fa fa-check"></i></button>
+                                        <button class="dropdown-item {{ faa.targeta_activa }}" type="button">Activa  <i class="fa fa-check"></i></button>
+                                        <button class="dropdown-item {{ faa.targeta_con_fondos}}" type="button">Con fondos  <i class="fa fa-times"></i> </button>
+                                      </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">{{ faa.credito }}</button>
+                                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                              <table>
+                                                <thead>
+                                                  <tr>
+                                                    <th>Concepto</th>
+                                                    <th>Monto</th>
+                                                    <th>%</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Monto del Credito</td>
+                                                    <td>{{ faa.credito }}</td>
+                                                    <td>100%</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Mano de Obra</td>
+                                                    <td>Moe</td>
+                                                    <td>-20%</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Compra Material</td>
+                                                    <td>Dooley</td>
+                                                    <td>80%</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Impuestos</td>
+                                                    <td>Dooley</td>
+                                                    <td>-16%</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </td>
+                            {% endif %}
+{#                            {{ faa.cliente.id }}#}
+{#                            {{ foo.id }}#}
+
+                        {% endfor %}
+
+
+
+		                <td>Activo</td>
+		                <td>12/09/07</td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+                    {% endfor %}
+                </tr>
+		      <tr>
+		        <td>Daniel Arzate Colin</td>
+		        <td>IFE</td>
+		        <td>BDF1234</td>
+		        <td class="red">7S8D97D9S8</td>
+		        <td>24932.00</td>
+		        <td>Activo</td>
+		        <td>12/09/07</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		      </tr>
+		      <tr>
+		        <td>Daniel Arzate Colin</td>
+		        <td class="yellow">IFE</td>
+		        <td>BDF1234</td>
+		        <td>7S8D97D9S8</td>
+		        <td>24932.00</td>
+		        <td>parado</td>
+		        <td>12/09/07</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		      </tr>
+		      	<td>Daniel Arzate Colin</td>
+		        <td class="yellow">IFE</td>
+		        <td>BDF1234</td>
+
+		        <td>17345.00</td>
+		        <td>24932.00</td>
+		        <td>Activo</td>
+		        <td>12/09/07</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>		        
+		      </tr>
+		      <tr>
+		        <td>Daniel Arzate Colin</td>
+		        <td class="red">IFE</td>
+		        <td>BDF1234</td>
+		        <td>7S8D97D9S8</td>	
+		        <td>17345.00</td>
+		        <td>24932.00</td>
+		        <td>Activo</td>
+		        <td>12/09/07</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		      </tr>
+		      <tr>
+		        <td>Daniel Arzate Colin</td>
+		        <td>IFE</td>
+		        <td>BDF1234</td>
+		        <td>7S8D97D9S8</td>
+		        <td>17345.00</td>
+		        <td>24932.00</td>
+		        <td>parado</td>
+		        <td>12/09/07</td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		        <td></td>
+		      </tr>
+		    </tbody>
+		 </table>
+</div>
+
+{% endblock contenido %}
+
+{% block javascript %}
+    <script>
+    var app = angular.module('Myapp', [])
+        .config(
+            function($interpolateProvider) {
+                $interpolateProvider.startSymbol('{$');
+                $interpolateProvider.endSymbol('$}');
+            }
+        );
+    app.controller('Test', function($scope) {
+      $scope.ngClassTest = 'test';
+      $scope.test = 'new-class';
+    });
+
+    </script>
+{% endblock %}
